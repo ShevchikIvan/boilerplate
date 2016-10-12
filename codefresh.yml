@@ -6,14 +6,14 @@ steps:
         type: build
         image-name: ncodefresh/fpm
         dockerfile: docker/fpm/Dockerfile
-        tag: ${{CF-BRANCH}}
+        tag: ${{CF_BRANCH}}
         build-arguments:
             - init_folder=docker/fpm
 
     publish-img-fpm:
         type: push
         candidate: ${{build-fpm}}
-        tag: ${{CF-BRANCH}}
+        tag: ${{CF_BRANCH}}
         credentials:
           username: ${{DOCKERHUB_USERNAME}}
           password: ${{DOCKERHUB_PWD}}
@@ -23,12 +23,14 @@ steps:
         type: build
         image-name: ncodefresh/node
         dockerfile: docker/node/Dockerfile
-        tag: ${{CF-BRANCH}}
+        tag: ${{CF_BRANCH}}
+        build-arguments:
+            - init_folder=docker/node
 
     publish-img-node:
         type: push
         candidate: ${{build-node}}
-        tag: ${{CF-BRANCH}}
+        tag: ${{CF_BRANCH}}
         credentials:
           username: ${{DOCKERHUB_USERNAME}}
           password: ${{DOCKERHUB_PWD}}
@@ -38,12 +40,14 @@ steps:
         type: build
         image-name: ncodefresh/php
         dockerfile: docker/php/Dockerfile
-        tag: ${{CF-BRANCH}}
+        tag: ${{CF_BRANCH}}
+        build-arguments:
+            - init_folder=docker/php
 
     publish-img-php:
         type: push
         candidate: ${{build-php}}
-        tag: ${{CF-BRANCH}}
+        tag: ${{CF_BRANCH}}
         credentials:
           username: ${{DOCKERHUB_USERNAME}}
           password: ${{DOCKERHUB_PWD}}
@@ -53,12 +57,14 @@ steps:
         type: build
         image-name: ncodefresh/ruby
         dockerfile: docker/ruby/Dockerfile
-        tag: ${{CF-BRANCH}}
+        tag: ${{CF_BRANCH}}
+        build-arguments:
+            - init_folder=docker/ruby
 
     publish-img-ruby:
         type: push
         candidate: ${{build-ruby}}
-        tag: ${{CF-BRANCH}}
+        tag: ${{CF_BRANCH}}
         credentials:
           username: ${{DOCKERHUB_USERNAME}}
           password: ${{DOCKERHUB_PWD}}

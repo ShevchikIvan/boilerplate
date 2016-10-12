@@ -2,6 +2,8 @@
 #We should probably look into splitting this file.
 FROM php:7
 
+ARG init_folder
+
 # Environment variable
 ENV SYMFONY_ENV prod
 ENV APCU_VERSION 5.1.2
@@ -43,9 +45,9 @@ RUN pecl install -o -f xdebug-2.4.0 \
     && rm -rf /tmp/pear
 
 # Configuration
-COPY php.ini /usr/local/etc/php/php.ini
-COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY $init_folder/php.ini /usr/local/etc/php/php.ini
+COPY $init_folder/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+COPY $init_folder/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 # Access right
 RUN mkdir -p /var/www/html

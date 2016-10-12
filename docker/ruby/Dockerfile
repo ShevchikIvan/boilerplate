@@ -1,5 +1,7 @@
 FROM ubuntu:14.04
 
+ARG init_folder
+
 RUN apt-get update
 RUN apt-get install -y ruby1.9.3 bundler
 
@@ -9,5 +11,5 @@ RUN mkdir -p /var/www/.bundler
 
 WORKDIR /var/www/html
 
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY $init_folder/entrypoint.sh /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
