@@ -7,6 +7,8 @@ steps:
         image-name: ncodefresh/fpm
         dockerfile: docker/fpm/Dockerfile
         tag: ${{CF-BRANCH}}
+        build-arguments:
+            - init-folder=docker/fpm
 
     publish-img-fpm:
         type: push

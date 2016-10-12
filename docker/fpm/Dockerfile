@@ -1,5 +1,7 @@
 FROM php:7-fpm
 
+ARG init-folder
+
 # Environment variable
 ENV SYMFONY_ENV prod
 ENV APCU_VERSION 5.1.2
@@ -44,8 +46,8 @@ RUN export VERSION=`php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;"` \
     && echo "blackfire.agent_socket=\${BLACKFIRE_PORT}" >> $PHP_INI_DIR/conf.d/blackfire.ini
 
 # Configuration
-COPY php.ini /usr/local/etc/php/php.ini
-COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY $init-folder/php.ini /usr/local/etc/php/php.ini
+COPY $init-folder/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+COPY $init-folder/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
