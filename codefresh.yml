@@ -1,0 +1,63 @@
+version: '1.0'
+
+steps:
+
+    build-fpm:
+        type: build
+        image-name: ncodefresh/fpm
+        dockerfile: docker/fpm/Dockerfile
+        tag: ${{CF-BRANCH}}
+
+    publish-img-fpm:
+        type: push
+        candidate: ${{build-fpm}}
+        tag: ${{CF-BRANCH}}
+        credentials:
+          username: ${{DOCKERHUB_USERNAME}}
+          password: ${{DOCKERHUB_PWD}}
+        fail-fast: false
+
+    build-node:
+        type: build
+        image-name: ncodefresh/node
+        dockerfile: docker/node/Dockerfile
+        tag: ${{CF-BRANCH}}
+
+    publish-img-node:
+        type: push
+        candidate: ${{build-node}}
+        tag: ${{CF-BRANCH}}
+        credentials:
+          username: ${{DOCKERHUB_USERNAME}}
+          password: ${{DOCKERHUB_PWD}}
+        fail-fast: false
+
+    build-php:
+        type: build
+        image-name: ncodefresh/php
+        dockerfile: docker/php/Dockerfile
+        tag: ${{CF-BRANCH}}
+
+    publish-img-php:
+        type: push
+        candidate: ${{build-php}}
+        tag: ${{CF-BRANCH}}
+        credentials:
+          username: ${{DOCKERHUB_USERNAME}}
+          password: ${{DOCKERHUB_PWD}}
+        fail-fast: false
+
+    build-ruby:
+        type: build
+        image-name: ncodefresh/ruby
+        dockerfile: docker/ruby/Dockerfile
+        tag: ${{CF-BRANCH}}
+
+    publish-img-ruby:
+        type: push
+        candidate: ${{build-ruby}}
+        tag: ${{CF-BRANCH}}
+        credentials:
+          username: ${{DOCKERHUB_USERNAME}}
+          password: ${{DOCKERHUB_PWD}}
+        fail-fast: false
