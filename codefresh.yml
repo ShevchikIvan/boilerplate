@@ -8,7 +8,7 @@ steps:
         dockerfile: docker/fpm/Dockerfile
         tag: ${{CF-BRANCH}}
         build-arguments:
-            - init-folder=docker/fpm
+            - init_folder=docker/fpm
 
     publish-img-fpm:
         type: push
